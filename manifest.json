@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "List Highlighter",
+  "version": "1.0",
+  "description": "Highlights and hides list elements",
+   "content_scripts": [
+    {
+      "js": ["scripts/content.js"],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}
