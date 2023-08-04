@@ -3,12 +3,15 @@
   "name": "List Highlighter",
   "version": "1.0",
   "description": "Highlights and hides list elements",
-   "content_scripts": [
+  "content_scripts": [
     {
       "js": ["content.js"],
       "matches": [
         "<all_urls>"
       ]
     }
+  ],
+  "permissions": [
+      "storage"
   ]
 }

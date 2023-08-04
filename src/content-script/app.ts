@@ -1,50 +1,50 @@
 import { Config } from "./domain/Config"
 
-const whiteList: RegExp[] = [
-]
+const storageKey = 'highlight-extension-user-data'
 
-const blackList: RegExp[] = [
-]
+const processPage = async () => {
+    // chrome.storage.sync.set({[storageKey]: configs})
 
-const configs: Config[] = [
-    {
-        url: /.*/,
-        listLocators: [ ],
-        whiteList,
-        blackList
-    }
-]
+    const storageData = await chrome.storage.sync.get(storageKey)
+    const configs: Config[] = storageData[storageKey] ?? []
 
-const config = configs.find(c => c.url.test(window.location.href))
+    console.log(configs)
 
-if (!!config) {
-    console.log("config found")
-    const elementBuckets = config.listLocators.map(locator => document.querySelectorAll(locator) as unknown as HTMLCollectionOf<HTMLElement>)
+    const config = configs.find(c => new RegExp(c.url, "i").test(window.location.href))
     
-    for (const elements of elementBuckets) {
-        for (const element of elements) {
-            console.log("processing element")
-    
-            let content = element.innerHTML
-    
-            if (config.blackList.some(blItem => blItem.test(content))) {
-                console.log("black-listed item found")
-    
-                element.style.opacity = "0.3"
-                continue;
-            }
-    
-            for (const wlItem of config.whiteList) {
-                if (!wlItem.test(content)) {
+    if (!!config) {
+        console.log("config found")
+        const elementBuckets = config.listLocators.map(locator => document.querySelectorAll(locator) as unknown as HTMLCollectionOf<HTMLElement>)
+        
+        for (const elements of elementBuckets) {
+            for (const element of elements) {
+                console.log("processing element")
+        
+                let content = element.innerHTML
+        
+                if (config.blackList.some(blItem => new RegExp(blItem, "i").test(content))) {
+                    console.log("black-listed item found")
+        
+                    element.style.opacity = "0.3"
                     continue;
                 }
-    
-                console.log("white-listed item found")
-    
-                content = content.replace(wlItem, '<b style="color: red;">$1</b>')
+        
+                for (const wlItem of config.whiteList) {
+                    const wlItemPattern = new RegExp(wlItem, "i")
+
+                    if (!wlItemPattern.test(content)) {
+                        continue;
+                    }
+        
+                    console.log("white-listed item found")
+        
+                    content = content.replace(wlItemPattern, '<b style="color: red;">$1</b>')
+                }
+        
+                element.innerHTML = content
             }
-    
-            element.innerHTML = content
         }
     }
 }
+
+processPage()

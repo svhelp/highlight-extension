@@ -1,6 +1,6 @@
 export interface Config {
-    url: RegExp,
+    url: string,
     listLocators: string[],
-    whiteList: RegExp[],
-    blackList: RegExp[],
+    whiteList: string[],
+    blackList: string[],
 }
