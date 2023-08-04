@@ -1,0 +1,28 @@
+{
+  "name": "highlight-extension",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/svhelp/highlight-extension.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/svhelp/highlight-extension/issues"
+  },
+  "homepage": "https://github.com/svhelp/highlight-extension#readme",
+  "devDependencies": {
+    "@types/chrome": "^0.0.243",
+    "copy-webpack-plugin": "^11.0.0",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
+}
