@@ -3,6 +3,9 @@
   "name": "List Highlighter",
   "version": "1.0",
   "description": "Highlights and hides list elements",
+  "action": {
+    "default_popup": "popup.html"
+  },
   "content_scripts": [
     {
       "js": ["content.js"],
