@@ -21,6 +21,7 @@
     "@types/chrome": "^0.0.243",
     "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
+    "@types/styled-components": "^5.1.26",
     "copy-webpack-plugin": "^11.0.0",
     "ts-loader": "^9.4.4",
     "typescript": "^5.1.6",
@@ -28,7 +29,12 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.3",
+    "@mui/material": "^5.14.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.0.7"
   }
 }
