@@ -33,6 +33,32 @@ export const Dashboard = () => {
 
     const config = configs.find(c => new RegExp(c.url, "i").test(location?.url ?? ""))
 
+    const addOrEditConfig = (patch: Partial<Config>) => {
+        if (!location) {
+            return
+        }
+
+        const updatedConfig: Config = config
+            ? Object.assign(config, patch)
+            : {
+                url: location.url ?? "",
+                listLocators: patch.listLocators ?? [],
+                whiteList: patch.whiteList ?? [],
+                blackList: patch.blackList ?? [],
+            }
+
+        const updateConfigs = [
+            ...configs.filter(c => c !== config),
+            updatedConfig
+        ]
+
+        setConfigs(updateConfigs)
+
+        chrome.storage.sync.set({
+            [storageKey]: updateConfigs
+        })
+    }
+
     return (
         <div>
             <Typography variant="h5">{location?.url ?? "Loading..."}</Typography>
@@ -44,7 +70,7 @@ export const Dashboard = () => {
                 </Alert>
             }
             
-            {config && <ConfigEditor config={config} />}
+            {config && <ConfigEditor config={config} addOrEditConfig={addOrEditConfig} />}
         </div>
     )
 }
