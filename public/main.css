@@ -1,0 +1,7 @@
+.highlight-extension-blacklist-item {
+    opacity: 0.3;
+}
+
+.highlight-extension-whitelist-item {
+    color: red;
+}

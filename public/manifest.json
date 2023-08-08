@@ -9,6 +9,7 @@
   "content_scripts": [
     {
       "js": ["content.js"],
+      "css" : ["main.css"],
       "matches": [
         "<all_urls>"
       ]
